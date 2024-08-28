@@ -2,20 +2,28 @@ import { Injectable } from '@nestjs/common';
 
 import { LoggerService } from '../logger/logger.service';
 import { PostsService } from '../posts/posts.service';
+import { UserRepository } from '../repository/services/user.repository';
 import { CreateUserDto } from './dto/req/create-user.dto';
 import { UpdateUserDto } from './dto/req/update-user.dto';
+import { ArticleRepository } from "../repository/services/article.repository";
 
 @Injectable()
 export class UsersService {
   constructor(
     private readonly carsService: PostsService,
     private readonly Logger: LoggerService,
+    private readonly userRepository: UserRepository,
+    private readonly articleRepository: ArticleRepository,
+
   ) {}
 
   public async create(createUserDto: CreateUserDto): Promise<any> {
     this.carsService.create({});
-    this.Logger.log('This is a test Massage');
-    return 'This action adds a new user';
+     return await this.userRepository.save({
+      name: 'Adam Max',
+      email: 'test.@test/com',
+      password: 'paswword',
+    });
   }
 
   public async findAll(): Promise<any> {
