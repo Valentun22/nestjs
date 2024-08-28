@@ -5,7 +5,6 @@ import { PostsService } from '../posts/posts.service';
 import { UserRepository } from '../repository/services/user.repository';
 import { CreateUserDto } from './dto/req/create-user.dto';
 import { UpdateUserDto } from './dto/req/update-user.dto';
-import { ArticleRepository } from "../repository/services/article.repository";
 
 @Injectable()
 export class UsersService {
@@ -13,8 +12,6 @@ export class UsersService {
     private readonly carsService: PostsService,
     private readonly Logger: LoggerService,
     private readonly userRepository: UserRepository,
-    private readonly articleRepository: ArticleRepository,
-
   ) {}
 
   public async create(createUserDto: CreateUserDto): Promise<any> {
