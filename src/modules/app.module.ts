@@ -9,6 +9,8 @@ import { PostgresModule } from './postgres/postgres.module';
 import { PostsModule } from './posts/posts.module';
 import { RepositoryModule } from './repository/repository.module';
 import { UsersModule } from './users/users.module';
+import { RedisModule } from "./redis/redis.module";
+import { AuthModule } from "./auth/auth.module";
 
 @Module({
   imports: [
@@ -17,6 +19,8 @@ import { UsersModule } from './users/users.module';
       isGlobal: true,
     }),
     PostgresModule,
+    RedisModule,
+    AuthModule,
     UsersModule,
     PostsModule,
     LoggerModule,
