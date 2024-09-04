@@ -25,21 +25,21 @@ export class UserEntity extends CreateUpdateModel {
   @Column('text', { nullable: true })
   image?: string;
 
-  @OneToMany(() => CommentEntity, (entity) => entity.user)
-  comments?: CommentEntity[];
-
   @OneToMany(() => LikeEntity, (entity) => entity.user)
   likes?: LikeEntity[];
 
+  @OneToMany(() => CommentEntity, (entity) => entity.user)
+  comments?: CommentEntity[];
+
   @OneToMany(() => ArticleEntity, (entity) => entity.user)
-  articles: ArticleEntity[];
+  articles?: ArticleEntity[];
 
   @OneToMany(() => RefreshTokenEntity, (entity) => entity.user)
-  refreshTokens: RefreshTokenEntity[];
+  refreshTokens?: RefreshTokenEntity[];
 
   @OneToMany(() => FollowEntity, (entity) => entity.followers)
-  followers: FollowEntity[];
+  followers?: FollowEntity[];
 
   @OneToMany(() => FollowEntity, (entity) => entity.followings)
-  followings: FollowEntity[];
+  followings?: FollowEntity[];
 }

@@ -4,13 +4,13 @@ import { APP_FILTER } from '@nestjs/core';
 
 import { GlobalExceptionFilter } from '../common/http/global-exception.filter';
 import configuration from '../config/configuration';
+import { ArticleModule } from './article/article.module';
+import { AuthModule } from './auth/auth.module';
 import { LoggerModule } from './logger/logger.module';
 import { PostgresModule } from './postgres/postgres.module';
-import { PostsModule } from './posts/posts.module';
+import { RedisModule } from './redis/redis.module';
 import { RepositoryModule } from './repository/repository.module';
 import { UsersModule } from './users/users.module';
-import { RedisModule } from "./redis/redis.module";
-import { AuthModule } from "./auth/auth.module";
 
 @Module({
   imports: [
@@ -22,7 +22,7 @@ import { AuthModule } from "./auth/auth.module";
     RedisModule,
     AuthModule,
     UsersModule,
-    PostsModule,
+    ArticleModule,
     LoggerModule,
     RepositoryModule,
   ],

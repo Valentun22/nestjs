@@ -1,14 +1,17 @@
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
 import { ArticleEntity } from './article.entity';
+import { TableNameEnum } from './enums/table-name.enum';
 import { CreateUpdateModel } from './models/create-update.model';
 import { UserEntity } from './user.entity';
-import { TableNameEnum } from "./enums/table-name.enum";
 
 @Entity(TableNameEnum.COMMENTS)
 export class CommentEntity extends CreateUpdateModel {
   @Column('text')
   body: string;
+
+  @Column('text')
+  title: string;
 
   @Column()
   user_id: string;

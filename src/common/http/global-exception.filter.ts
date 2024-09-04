@@ -9,7 +9,7 @@ import { Request, Response } from 'express';
 import { QueryFailedError } from 'typeorm';
 
 import { LoggerService } from '../../modules/logger/logger.service';
-import { DbQueryFailedFilter } from "./db-query-failed.filter";
+import { DbQueryFailedFilter } from './db-query-failed.filter';
 
 @Catch()
 export class GlobalExceptionFilter implements ExceptionFilter {
@@ -25,7 +25,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
 
     if (exception instanceof BadRequestException) {
       status = exception.getStatus();
-      messages = (exception.getResponse() as any).messages;
+      messages = (exception.getResponse() as any).message;
     } else if (exception instanceof HttpException) {
       status = exception.getStatus();
       messages = exception.message;
@@ -35,7 +35,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       messages = error.message;
     } else {
       status = 500;
-      messages = 'Internal Server Error';
+      messages = 'Internal server error';
     }
     this.logger.error(exception);
 

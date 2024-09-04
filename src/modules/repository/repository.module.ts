@@ -13,10 +13,11 @@ const repositories = [
   CommentRepository,
   FollowRepository,
   LikeRepository,
-  TagRepository,
   RefreshTokenRepository,
+  TagRepository,
   UserRepository,
 ];
+
 @Global()
 @Module({
   imports: [],

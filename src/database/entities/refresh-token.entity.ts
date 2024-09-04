@@ -1,8 +1,8 @@
-import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
+import { TableNameEnum } from './enums/table-name.enum';
 import { CreateUpdateModel } from './models/create-update.model';
 import { UserEntity } from './user.entity';
-import { TableNameEnum } from "./enums/table-name.enum";
 
 @Entity(TableNameEnum.REFRESH_TOKENS)
 export class RefreshTokenEntity extends CreateUpdateModel {
@@ -14,7 +14,9 @@ export class RefreshTokenEntity extends CreateUpdateModel {
 
   @Column()
   user_id: string;
-  @ManyToOne(() => UserEntity, (entity) => entity.refreshTokens)
+  @ManyToOne(() => UserEntity, (entity) => entity.refreshTokens, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'user_id' })
   user?: UserEntity;
 }
