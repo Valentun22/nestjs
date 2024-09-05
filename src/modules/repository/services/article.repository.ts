@@ -17,6 +17,15 @@ export class ArticleRepository extends Repository<ArticleEntity> {
     const qb = this.createQueryBuilder('article');
 
     qb.leftJoinAndSelect('article.tags', 'tag');
+    qb.leftJoinAndSelect('article.user', 'user');
+
+    qb.leftJoinAndSelect(
+      'user.followings',
+      'following',
+      'following.follower_id = :userId',
+      { userId },
+    );
+
     if (query.search) {
       qb.andWhere('CONCAT(article.title, article.description) ILIKE :search');
       qb.setParameter('search', `%${query.search}%`);
@@ -31,5 +40,25 @@ export class ArticleRepository extends Repository<ArticleEntity> {
     qb.skip(query.offset);
 
     return await qb.getManyAndCount();
+  }
+
+  public async getByID(
+    userId: string,
+    articleId: string,
+  ): Promise<ArticleEntity> {
+    const qb = this.createQueryBuilder('article');
+
+    qb.leftJoinAndSelect('article.tags', 'tag');
+    qb.leftJoinAndSelect('article.user', 'user');
+
+    qb.leftJoinAndSelect(
+      'user.followings',
+      'following',
+      'following.follower_id = :userId',
+      { userId },
+    );
+    qb.andWhere('article.id = :articleId', { articleId });
+
+    return await qb.getOneOrFail();
   }
 }
