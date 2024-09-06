@@ -8,5 +8,6 @@ export class ArticleListItemResDto extends PickType(BaseArticleResDto, [
   'description',
   'created',
   'tags',
-  'user'
+  'isLiked',
+  'user',
 ]) {}

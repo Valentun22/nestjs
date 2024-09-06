@@ -1,9 +1,9 @@
 import { ArticleEntity } from '../../../database/entities/article.entity';
+import { UserMapper } from '../../users/user.mapper';
 import { ArticleListQueryDto } from '../dto/req/article-list.query.dto';
 import { ArticleResDto } from '../dto/res/article.res.dto';
 import { ArticleListResDto } from '../dto/res/article-list.res.dto';
 import { ArticleListItemResDto } from '../dto/res/article-list-item.res.dto';
-import { UserMapper } from "../../users/user.mapper";
 
 export class ArticleMapper {
   public static toResponseListDTO(
@@ -27,6 +27,7 @@ export class ArticleMapper {
       description: entity.description,
       created: entity.created,
       tags: entity.tags.map((tag) => tag.name),
+      isLiked: entity.likes?.length > 0,
       user: UserMapper.toResponseDTO(entity.user),
     };
   }
@@ -40,6 +41,7 @@ export class ArticleMapper {
       created: entity.created,
       updated: entity.updated,
       tags: entity.tags.map((tag) => tag.name),
+      isLiked: entity.likes?.length > 0,
       user: UserMapper.toResponseDTO(entity.user),
     };
   }
